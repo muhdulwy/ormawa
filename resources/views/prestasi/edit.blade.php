@@ -26,7 +26,7 @@
         </div>
     @endif
 
-    <form action="{{ route('prestasi.update', $prestasi->id) }}" method="POST">
+    <form action="{{ route('prestasi.update', $prestasi->id) }}" method="POST" enctype="multipart/form-data">
         @csrf   
         @method('PUT')
 
@@ -48,6 +48,18 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
+                    <strong>Predikat:</strong>
+                    <select name="predikat" class="form-control">
+                        <option value="">-- Pilih Predikat --</option>
+                        @foreach ($predikat as $prdkt)
+                             <option value="{{ $prdkt }}" {{ old('predikat', $prestasi->predikat) == $prdkt? 'selected' : '' }}>{{ $prdkt}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
                     <strong>Organisasi:</strong>
                     <select name="organisasi_id" class="form-control">
                         <option value="">-- Pilih Organisasi --</option>
@@ -57,6 +69,22 @@
                     </select>
                 </div>
             </div> 
+
+            <div class="col-xs-12 col-sm-5 col-md-12">
+                <div class="form-group">
+
+                    <label class="form-label" for="dokumentasi">Dokumentasi</label>
+                    <input type="hidden" name="oldImage" value="{{$prestasi->dokumentasi}}">
+
+                    @if ($prestasi->dokumentasi)
+                        <img src="{{asset('storage/'.$prestasi->dokumentasi)}}" class="img-preview img-fluid mb-3 col-sm-3 d-block" > 
+                    @else
+                        <img class="img-preview img-fluid mb-3 col-sm-3" >                        
+                    @endif
+
+                    <input type="file" class="form-control" id="dokumentasi" name="dokumentasi" onchange="previewImage()" />
+                </div>
+            </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -83,6 +111,22 @@
                 $("#delete-form").submit();
             }
         }
+
+        function previewImage() {        
+            const image = document.querySelector('#dokumentasi');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent){
+                imgPreview.src = oFREvent.target.result;
+            }
+
+        }
+
 
     </script>
 @endpush

@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\OrganisasiController;
+use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\PrestasiController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +19,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::resource('organisasi', OrganisasiController::class);
-Route::resource('prestasi', PrestasiController::class);
-Route::resource('kegiatan', KegiatanController::class);
+Auth::routes();
+
+Route::get('/', function() {
+    return view('home');
+})->name('home')->middleware('auth');
+Route::get('/home', function() {
+    return view('home');
+})->name('home')->middleware('auth');
+
+Route::resource('organisasi', OrganisasiController::class)->middleware('auth');
+Route::resource('pengurus', PengurusController::class)->middleware('auth');
+Route::resource('prestasi', PrestasiController::class)->middleware('auth');
+Route::resource('kegiatan', KegiatanController::class)->middleware('auth');
+

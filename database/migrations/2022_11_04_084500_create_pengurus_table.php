@@ -14,10 +14,13 @@ class CreatePengurusTable extends Migration
     public function up()
     {
         Schema::create('pengurus', function (Blueprint $table) {
-            $table->bigIncrements('NIM');
+            $table->bigIncrements('id');
+            $table->BigInteger('NIM')->unique();
             $table->string('nama');
+            $table->enum('kelamin', ['Laki-laki', 'Perempuan']);
             $table->string('fakultas');
             $table->string('periode');
+            $table->string('jabatan');
             $table->string('telp');
 
             /* timestamp */

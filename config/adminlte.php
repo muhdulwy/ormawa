@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'ORMAWA',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>ORMAWA',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -306,11 +306,11 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
+        // [
+        //     'text' => 'blog',
+        //     'url'  => 'admin/blog',
+        //     'can'  => 'manage-blog',
+        // ],
         [
             'text'        => 'Organisasi',
             'url'         => 'organisasi',
@@ -333,22 +333,7 @@ return [
             'url'         => 'prestasi',
             'icon'        => 'far fa-fw fa-file',
         ],
-        [
-            'text'        => 'Dokumentasi',
-            'url'         => 'dokumentasi',
-            'icon'        => 'far fa-fw fa-file',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+
         // [
         //     'text'    => 'multilevel',
         //     'icon'    => 'fas fa-fw fa-share',

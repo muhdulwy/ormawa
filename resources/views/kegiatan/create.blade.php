@@ -26,7 +26,7 @@
         </div>
     @endif
 
-    <form action="{{ route('kegiatan.store') }}" method="POST">
+    <form action="{{ route('kegiatan.store') }}" method="POST" enctype="multipart/form-data">
         @csrf   
 
         <div class="row">
@@ -57,6 +57,33 @@
                 </div>
             </div> 
 
+            <div class="col-xs-12 col-sm-5 col-md-12">
+                <div class="form-group">
+                    <label class="form-label" for="dokumentasi">Dokumentasi</label>
+                    <img class="img-preview img-fluid mb-3 col-sm-3" >
+                    <input type="file" class="form-control" id="dokumentasi" name="dokumentasi" onchange="previewImage()" />
+                </div>
+            </div>
+
+            {{-- <div class="col-xs-12 col-sm-5 col-md-12">
+                <div class="form-group">
+                    <label for="exampleInputFile">Dokumentasi</label>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="dokumentasi" name="dokumentasi">
+                            <label class="custom-file-label" for="dokumentasi">Pilih file</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                // Add the following code if you want the name of the file appear on select
+                $(".custom-file-input").on("change", function () {
+                  var fileName = $(this).val().split("\\").pop();
+                  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                });
+            </script> --}}
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
@@ -83,5 +110,20 @@
             }
         }
 
+        function previewImage() {        
+            const image = document.querySelector('#dokumentasi');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent){
+                imgPreview.src = oFREvent.target.result;
+            }
+
+        }
+        
     </script>
 @endpush

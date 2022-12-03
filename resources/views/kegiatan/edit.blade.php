@@ -26,7 +26,7 @@
         </div>
     @endif
 
-    <form action="{{ route('kegiatan.update', $kegiatan->id) }}" method="POST">
+    <form action="{{ route('kegiatan.update', $kegiatan->id) }}" method="POST" enctype="multipart/form-data">
         @csrf   
         @method('PUT')
 
@@ -58,6 +58,22 @@
                 </div>
             </div> 
 
+            <div class="col-xs-12 col-sm-5 col-md-12">
+                <div class="form-group">
+
+                    <label class="form-label" for="dokumentasi">Dokumentasi</label>
+                    <input type="hidden" name="oldImage" value="{{$kegiatan->dokumentasi}}">
+
+                    @if ($kegiatan->dokumentasi)
+                        <img src="{{asset('storage/'.$kegiatan->dokumentasi)}}" class="img-preview img-fluid mb-3 col-sm-3 d-block" > 
+                    @else
+                        <img class="img-preview img-fluid mb-3 col-sm-3" >                        
+                    @endif
+
+                    <input type="file" class="form-control" id="dokumentasi" name="dokumentasi" onchange="previewImage()" />
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
@@ -82,6 +98,21 @@
                 $("#delete-form").attr('action', $(el).attr('href'));
                 $("#delete-form").submit();
             }
+        }
+
+        function previewImage() {        
+            const image = document.querySelector('#dokumentasi');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function(oFREvent){
+                imgPreview.src = oFREvent.target.result;
+            }
+
         }
 
     </script>

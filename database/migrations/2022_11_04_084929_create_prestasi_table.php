@@ -17,6 +17,7 @@ class CreatePrestasiTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->string('kategori');
+            $table->text('dokumentasi')->nullable();
             $table->unsignedBigInteger('organisasi_id');
 
             /* relation */

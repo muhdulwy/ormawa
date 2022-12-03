@@ -1,16 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Tambah Prestasi')
+@section('title', 'Tambah Pengurus')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">Tambah Prestasi</h1>
+    <h1 class="m-0 text-dark">Tambah Pengurus</h1>
 @stop
 
 @section('content')
     <div class="row mt-5 mb-5">
         <div class="col-lg-12 margin-tb">
+            
             <div class="float-right">
-                <a class="btn btn-secondary" href="{{ route('prestasi.index') }}"> Kembali</a>
+                <a class="btn btn-secondary" href="{{ route('pengurus.index') }}"> Kembali</a>
             </div>
         </div>
     </div>
@@ -26,11 +27,18 @@
         </div>
     @endif
 
-    <form action="{{ route('prestasi.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf   
+    <form action="{{ route('pengurus.store') }}" method="POST">
+        @csrf
 
-        <div class="row">
-            
+        <div class="row">   
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>NIM:</strong>
+                    <input type="text" name="NIM" class="form-control" placeholder="NIM" value="{{ old('NIM') }}">
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Nama:</strong>
@@ -40,23 +48,39 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Kategori</strong>
-                    <input type="text" name="kategori" class="form-control" placeholder="Kategori" value="{{ old('kategori') }}">
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Predikat:</strong>
-                    <select name="predikat" class="form-control">
-                        <option value="">-- Pilih Predikat --</option>
-                        @foreach ($predikat as $prdkt)
-                            <option value="{{ $prdkt }}" {{ old('predikat') == $prdkt ? 'selected' : '' }}>{{ $prdkt }}</option>
+                    <strong>Jenis Kelamin:</strong>
+                    <select name="kelamin" class="form-control">
+                        <option value="">-- Pilih Jenis Kelamin --</option>
+                        @foreach ($kelamin as $jeniskelamin)
+                            <option value="{{ $jeniskelamin }}" {{ old('kelamin') == $jeniskelamin ? 'selected' : '' }}>{{ $jeniskelamin }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
-
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Fakultas</strong>
+                    <input type="text" name="fakultas" class="form-control" placeholder="Fakultas" value="{{ old('fakultas') }}">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Periode</strong>
+                    <input type="text" name="periode" class="form-control" placeholder="Periode" value="{{ old('periode') }}">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Jabatan</strong>
+                    <input type="text" name="jabatan" class="form-control" placeholder="Jabatan" value="{{ old('jabatan') }}">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Telpon</strong>
+                    <input type="number" name="telp" class="form-control" placeholder="Telpon" value="{{ old('telp') }}">
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Organisasi:</strong>
@@ -68,15 +92,6 @@
                     </select>
                 </div>
             </div> 
-
-            <div class="col-xs-12 col-sm-5 col-md-12">
-                <div class="form-group">
-                    <label class="form-label" for="dokumentasi">Dokumentasi</label>
-                    <img class="img-preview img-fluid mb-3 col-sm-3" >
-                    <input type="file" class="form-control" id="dokumentasi" name="dokumentasi" onchange="previewImage()" />
-                </div>
-            </div>
-
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
@@ -101,21 +116,6 @@
                 $("#delete-form").attr('action', $(el).attr('href'));
                 $("#delete-form").submit();
             }
-        }
-
-        function previewImage() {        
-            const image = document.querySelector('#dokumentasi');
-            const imgPreview = document.querySelector('.img-preview');
-
-            imgPreview.style.display = 'block';
-
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(image.files[0]);
-
-            oFReader.onload = function(oFREvent){
-                imgPreview.src = oFREvent.target.result;
-            }
-
         }
 
     </script>

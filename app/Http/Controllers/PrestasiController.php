@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Organisasi;
 use App\Models\Prestasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PrestasiController extends Controller
 {
@@ -22,8 +23,10 @@ class PrestasiController extends Controller
     public function create()
     {
         $organisasi = Organisasi::all();
+        $predikat = ['Emas', 'Perak', 'Perunggu'];
         
-        return view('prestasi.create', compact('organisasi'));
+
+        return view('prestasi.create', compact('organisasi','predikat'));
     }
 
     /**
@@ -34,14 +37,19 @@ class PrestasiController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validate = $request->validate([
             'nama' => 'required',
             'kategori' => 'required',
+            'predikat' => 'required',
             'organisasi_id' => 'required|exists:organisasi,id',
+            'image' => 'image:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         
-        Prestasi::create($request->all());
+        if ($request->file('dokumentasi')){
+            $validate['dokumentasi'] = $request->file('dokumentasi')->store('dokumentasi');
+        }
 
+        Prestasi::create( $validate);
 
         return redirect()->route('prestasi.index')->with('succes','Data Berhasil di Input');
     }
@@ -65,10 +73,11 @@ class PrestasiController extends Controller
      */
     public function edit(Prestasi $prestasi)
     {
-
-        $organisasi = Organisasi::all();
         
-        return view('prestasi.edit', compact('organisasi'))->with('prestasi', $prestasi);
+        $organisasi = Organisasi::all();
+        $predikat = ['Emas', 'Perak', 'Perunggu'];
+        
+        return view('prestasi.edit', compact('organisasi', 'predikat'))->with('prestasi', $prestasi);
     }
 
     /**
@@ -80,12 +89,22 @@ class PrestasiController extends Controller
      */
     public function update(Request $request, Prestasi $prestasi)
     {
-        $request->validate([
+        $validate = $request->validate([
             'nama' => 'required',
             'kategori' => 'required',
+            'predikat' => 'required',
             'organisasi_id' => 'required|exists:organisasi,id',
+            'image' => 'image:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-        $prestasi->update($request->all());
+
+        if ($request->file('dokumentasi')){
+            if($request->oldImage){
+                Storage::delete($request->oldImage);
+            }
+            $validate['dokumentasi'] = $request->file('dokumentasi')->store('dokumentasi');
+        }
+
+        $prestasi->update($validate);
         return redirect()->route('prestasi.index')->with('succes','Data Berhasil di Update');
     }
 
@@ -97,6 +116,10 @@ class PrestasiController extends Controller
      */
     public function destroy(Prestasi $prestasi)
     {
+        if($prestasi->dokumentasi){
+            Storage::delete($prestasi->dokumentasi);
+        }
+
         $prestasi->delete();
         return redirect()->route('prestasi.index')->with('succes','Data Berhasil di Hapus');
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kegiatan;
 use App\Models\Organisasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class KegiatanController extends Controller
 {
@@ -34,13 +35,19 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+
+        $validate = $request->validate([
             'nama' => 'required',
             'tgl_kegiatan' => 'required',
             'organisasi_id' => 'required|exists:organisasi,id',
+            'image' => 'image:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+
+        if ($request->file('dokumentasi')){
+            $validate['dokumentasi'] = $request->file('dokumentasi')->store('dokumentasi');
+        }
         
-        Kegiatan::create($request->all());
+        Kegiatan::create($validate);
 
 
         return redirect()->route('kegiatan.index')->with('succes','Data Berhasil di Input');
@@ -80,12 +87,22 @@ class KegiatanController extends Controller
      */
     public function update(Request $request, Kegiatan $kegiatan)
     {
-        $request->validate([
+        $validate = $request->validate([
             'nama' => 'required',
             'tgl_kegiatan' => 'required',
             'organisasi_id' => 'required|exists:organisasi,id',
+            'image' => 'image:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-        $kegiatan->update($request->all());
+
+        if ($request->file('dokumentasi')){
+            if($request->oldImage){
+                Storage::delete($request->oldImage);
+            }
+            $validate['dokumentasi'] = $request->file('dokumentasi')->store('dokumentasi');
+        }
+
+        $kegiatan->update($validate);
+
         return redirect()->route('kegiatan.index')->with('succes','Data Berhasil di Update');
     }
 
@@ -97,6 +114,9 @@ class KegiatanController extends Controller
      */
     public function destroy(Kegiatan $kegiatan)
     {
+        if($kegiatan->dokumentasi){
+            Storage::delete($kegiatan->dokumentasi);
+        }
         $kegiatan->delete();
         return redirect()->route('kegiatan.index')->with('succes','Data Berhasil di Hapus');
     }

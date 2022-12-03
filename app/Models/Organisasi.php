@@ -21,11 +21,6 @@ class Organisasi extends Model
         return $this->hasmany(Kegiatan::class);
     }
 
-    public function dokumentasi()
-    {
-        return $this->hasmany(Dokumentasi::class);
-    }
-
     public function prestasi()
     {
         return $this->hasmany(Prestasi::class);

@@ -9,19 +9,22 @@ class Pengurus extends Model
 {
     use HasFactory;
     protected $table = 'pengurus';
-    protected $primaryKey = 'NIM';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
 
+        'NIM',
         'nama',
+        'kelamin',
         'fakultas',
         'periode', 
+        'jabatan',
         'telp',
-        'jabatan'
     ];
 
     public function organisasi()
     {
         return $this->belongsToMany(Organisasi::class)->withTimestamps();
     }
+    
 }

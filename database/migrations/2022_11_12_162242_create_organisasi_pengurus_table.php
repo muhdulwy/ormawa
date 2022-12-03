@@ -15,11 +15,13 @@ class CreateOrganisasiPengurusTable extends Migration
     {
         Schema::create('organisasi_pengurus', function (Blueprint $table) {
             $table->unsignedBigInteger('organisasi_id');
-            $table->unsignedBigInteger('NIM');
+            $table->unsignedBigInteger('pengurus_id');
 
             /* relation */
-            $table->foreign('organisasi_id')->references('id')->on('organisasi');
-            $table->foreign('NIM')->references('NIM')->on('pengurus');
+            $table->foreign('organisasi_id')->references('id')->on('organisasi')->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->foreign('pengurus_id')->references('id')->on('pengurus')->onUpdate('cascade')
+            ->onDelete('cascade');
 
             /* timestamp */
             $table->timestamp('created_at')->useCurrent();

@@ -22,7 +22,9 @@
                             <th>No.</th>
                             <th>Nama</th>
                             <th>Kategori</th>
+                            <th>Predikat</th>
                             <th>Organisasi</th>
+                            <th>Dokumentasi</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -32,7 +34,9 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{$pts->nama}}</td>
                                 <td>{{$pts->kategori}}</td>
+                                <td>{{$pts->predikat}}</td>
                                 <td>{{$pts->organisasi->nama}}</td>
+                                <td><img src="{{asset('storage/'.$pts->dokumentasi)}}"  width="100px"></td>
                                 <td>
                                     <a href="{{route('prestasi.edit', $pts)}}" class="btn btn-primary btn-xs">
                                         Edit

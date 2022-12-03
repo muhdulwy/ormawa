@@ -17,6 +17,7 @@ class CreateKegiatanTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->date('tgl_kegiatan');
+            $table->text('dokumentasi')->nullable();
             $table->unsignedBigInteger('organisasi_id');
 
             /* relation */

@@ -15,11 +15,14 @@ class Prestasi extends Model
 
         'nama',
         'kategori',
-        'organisasi_id'
+        'predikat',
+        'dokumentasi',
+        'organisasi_id',
     ];
 
     public function organisasi()
     {
         return $this->belongsTo(Organisasi::class);
     }
+
 }

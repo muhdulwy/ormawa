@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organisasi;
+use App\Models\Pengurus;
 use Illuminate\Http\Request;
 
 class PengurusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $pengurus = Pengurus::all();
+
+        $pengurus->map(function ($pgs) {
+            $pgs->organisasis = $pgs->organisasi->map(function($org){
+                return $org->nama;
+            })->implode(', ');
+        });
+
+        return view('pengurus.index',compact('pengurus'));
     }
 
     /**
@@ -23,7 +28,10 @@ class PengurusController extends Controller
      */
     public function create()
     {
-        //
+        $organisasi = Organisasi::all();
+        $kelamin = ['Laki-laki', 'Perempuan'];
+        
+        return view('pengurus.create', compact('organisasi', 'kelamin'));
     }
 
     /**
@@ -34,7 +42,22 @@ class PengurusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'NIM'   => 'required',
+            'nama' => 'required',
+            'kelamin' => 'required',
+            'fakultas' => 'required',
+            'periode' => 'required',
+            'jabatan' => 'required',
+            'telp' => 'required',
+            'organisasi_id' => 'required|exists:organisasi,id',
+        ]);
+        
+        $pengurus = Pengurus::create($request->all());
+        $pengurus->organisasi()->attach($request->organisasi_id);
+
+
+        return redirect()->route('pengurus.index')->with('succes','Data Berhasil di Input');
     }
 
     /**
@@ -43,9 +66,9 @@ class PengurusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Pengurus $pengurus)
     {
-        //
+        return view('pengurus.show');
     }
 
     /**
@@ -54,9 +77,17 @@ class PengurusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pengurus $penguru)
     {
-        //
+
+        $organisasi = Organisasi::all();
+        $kelamin = ['Laki-laki', 'Perempuan'];
+
+        $penguru->organisasis = $penguru->organisasi->map(function($org){
+                return $org->nama;
+            })->implode(', ');
+        
+        return view('pengurus.edit', compact('organisasi', 'kelamin'))->with('pengurus', $penguru);
     }
 
     /**
@@ -66,9 +97,21 @@ class PengurusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pengurus $penguru)
     {
-        //
+        $request->validate([
+            'NIM'   => 'required',
+            'nama' => 'required',
+            'kelamin' => 'required',
+            'fakultas' => 'required',
+            'periode' => 'required',
+            'jabatan' => 'required',
+            'telp' => 'required',
+            'organisasi_id' => 'required|exists:organisasi,id',
+        ]);
+        $penguru->update($request->all());
+
+        return redirect()->route('pengurus.index')->with('succes','Data Berhasil di Update');
     }
 
     /**
@@ -77,8 +120,10 @@ class PengurusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pengurus $penguru)
     {
-        //
+        $penguru->delete();
+        return redirect()->route('pengurus.index')->with('succes','Data Berhasil di Hapus');
     }
+
 }

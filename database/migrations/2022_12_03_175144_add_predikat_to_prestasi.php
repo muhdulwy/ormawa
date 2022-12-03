@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddJabatanToPengurusTable extends Migration
+class AddPredikatToPrestasi extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddJabatanToPengurusTable extends Migration
      */
     public function up()
     {
-        Schema::table('pengurus', function (Blueprint $table) {
-            $table->string('jabatan');
+        Schema::table('prestasi', function (Blueprint $table) {
+            $table->enum('predikat', ['Emas', 'Perak', 'Perunggu']);
         });
     }
 
@@ -25,7 +25,7 @@ class AddJabatanToPengurusTable extends Migration
      */
     public function down()
     {
-        Schema::table('pengurus', function (Blueprint $table) {
+        Schema::table('prestasi', function (Blueprint $table) {
             //
         });
     }

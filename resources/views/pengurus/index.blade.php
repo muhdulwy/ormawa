@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'List Kegiatan')
+@section('title', 'List Pengurus')
 
 @section('content_header')
-    <h1 class="m-0 text-dark">List Kegiatan</h1>
+    <h1 class="m-0 text-dark">List Pengurus</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <a href="{{route('kegiatan.create')}}" class="btn btn-primary mb-2">
+                    <a href="{{route('pengurus.create')}}" class="btn btn-primary mb-2">
                         Tambah
                     </a>
 
@@ -20,27 +20,34 @@
                         <thead>
                         <tr>
                             <th>No.</th>
+                            <th>NIM</th>
                             <th>Nama</th>
-                            <th>Tanggal Kegiatan</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Fakultas</th>
+                            <th>Periode</th>
+                            <th>Jabatan</th>
+                            <th>Telpon</th>
                             <th>Organisasi</th>
-                            <th>Dokumentasi</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($kegiatan as $key => $kgt)
+                        @foreach($pengurus as $key => $pgs)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td>{{$kgt->nama}}</td>
-                                <td>{{$kgt->tgl_kegiatan}}</td>
-                                <td>{{$kgt->organisasi->nama}}</td>
-                                <td><img src="{{asset('storage/'.$kgt->dokumentasi)}}"  width="100px"></td>
-                                
+                                <td>{{$pgs->NIM}}</td>
+                                <td>{{$pgs->nama}}</td>
+                                <td>{{$pgs->kelamin}}</td>
+                                <td>{{$pgs->fakultas}}</td>
+                                <td>{{$pgs->periode}}</td>
+                                <td>{{$pgs->jabatan}}</td>
+                                <td>{{$pgs->telp}}</td>
+                                <td>{{$pgs->organisasis}}</td>
                                 <td>
-                                    <a href="{{route('kegiatan.edit', $kgt)}}" class="btn btn-primary btn-xs">
+                                    <a href="{{route('pengurus.edit', $pgs)}}" class="btn btn-primary btn-xs">
                                         Edit
                                     </a>
-                                    <a href="{{route('kegiatan.destroy', $kgt)}}" onclick="notificationBeforeDelete(event, this)" class="btn btn-danger btn-xs">
+                                    <a href="{{route('pengurus.destroy', $pgs)}}" onclick="notificationBeforeDelete(event, this)" class="btn btn-danger btn-xs">
                                         Delete
                                     </a>
                                 </td>
