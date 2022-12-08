@@ -41,6 +41,7 @@ class PrestasiController extends Controller
             'nama' => 'required',
             'kategori' => 'required',
             'predikat' => 'required',
+            'tahun' => 'required',
             'organisasi_id' => 'required|exists:organisasi,id',
             'image' => 'image:jpeg,png,jpg,gif,svg|max:2048'
         ]);
@@ -93,6 +94,7 @@ class PrestasiController extends Controller
             'nama' => 'required',
             'kategori' => 'required',
             'predikat' => 'required',
+            'tahun' => 'required',
             'organisasi_id' => 'required|exists:organisasi,id',
             'image' => 'image:jpeg,png,jpg,gif,svg|max:2048'
         ]);

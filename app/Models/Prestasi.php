@@ -16,6 +16,7 @@ class Prestasi extends Model
         'nama',
         'kategori',
         'predikat',
+        'tahun',
         'dokumentasi',
         'organisasi_id',
     ];

@@ -23,6 +23,7 @@
                             <th>Nama</th>
                             <th>Kategori</th>
                             <th>Predikat</th>
+                            <th>Tahun</th>
                             <th>Organisasi</th>
                             <th>Dokumentasi</th>
                             <th>Action</th>
@@ -35,6 +36,7 @@
                                 <td>{{$pts->nama}}</td>
                                 <td>{{$pts->kategori}}</td>
                                 <td>{{$pts->predikat}}</td>
+                                <td>{{$pts->tahun}}</td>
                                 <td>{{$pts->organisasi->nama}}</td>
                                 <td><img src="{{asset('storage/'.$pts->dokumentasi)}}"  width="100px"></td>
                                 <td>

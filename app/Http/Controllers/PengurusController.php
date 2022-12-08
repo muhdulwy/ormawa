@@ -43,7 +43,7 @@ class PengurusController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'NIM'   => 'required',
+            'NIM'   => 'required|unique:pengurus,NIM',
             'nama' => 'required',
             'kelamin' => 'required',
             'fakultas' => 'required',
@@ -100,7 +100,7 @@ class PengurusController extends Controller
     public function update(Request $request, Pengurus $penguru)
     {
         $request->validate([
-            'NIM'   => 'required',
+            'NIM'   => 'required|unique:pengurus,NIM',
             'nama' => 'required',
             'kelamin' => 'required',
             'fakultas' => 'required',

@@ -15,7 +15,9 @@ class Kegiatan extends Model
 
         'nama',
         'dokumentasi',
-        'tgl_kegiatan',
+        'tgl_mulai',
+        'tgl_selesai',
+        'thn_akademik',
         'organisasi_id'
     ];
 

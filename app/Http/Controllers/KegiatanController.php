@@ -38,7 +38,9 @@ class KegiatanController extends Controller
 
         $validate = $request->validate([
             'nama' => 'required',
-            'tgl_kegiatan' => 'required',
+            'tgl_mulai' => 'required',
+            'tgl_selesai' => 'required',
+            'thn_akademik' => 'required',
             'organisasi_id' => 'required|exists:organisasi,id',
             'image' => 'image:jpeg,png,jpg,gif,svg|max:2048'
         ]);
@@ -89,7 +91,9 @@ class KegiatanController extends Controller
     {
         $validate = $request->validate([
             'nama' => 'required',
-            'tgl_kegiatan' => 'required',
+            'tgl_mulai' => 'required',
+            'tgl_selesai' => 'required',
+            'thn_akademik' => 'required',
             'organisasi_id' => 'required|exists:organisasi,id',
             'image' => 'image:jpeg,png,jpg,gif,svg|max:2048'
         ]);

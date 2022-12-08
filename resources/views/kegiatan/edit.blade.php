@@ -41,8 +41,21 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Tanggal Kegiatan</strong>
-                    <input type="date" name="tgl_kegiatan" class="form-control" placeholder="Tanggal Kegiatan" value="{{ old('tgl_kegiatan', $kegiatan->tgl_kegiatan) }}">
+                    <strong>Tanggal Mulai</strong>
+                    <input type="date" name="tgl_mulai" class="form-control" placeholder="Tanggal Mulai" value="{{ old('tgl_mulai', $kegiatan->tgl_mulai) }}">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Tanggal Selesai</strong>
+                    <input type="date" name="tgl_selesai" class="form-control" placeholder="Tanggal Selesai" value="{{ old('tgl_selesai', $kegiatan->tgl_selesai) }}">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Tahun Akademik</strong>
+                    <input type="text" name="thn_akademik" class="form-control" placeholder="Tahun Akademik" value="{{ old('thn_akademik', $kegiatan->thn_akademik) }}">
                 </div>
             </div>
 

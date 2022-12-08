@@ -59,6 +59,13 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
+                    <strong>Tahun</strong>
+                    <input type="text" name="tahun" class="form-control" placeholder="Tahun" value="{{ old('tahun') }}">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
                     <strong>Organisasi:</strong>
                     <select name="organisasi_id" class="form-control">
                         <option value="">-- Pilih Organisasi --</option>
