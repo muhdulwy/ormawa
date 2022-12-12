@@ -20,7 +20,8 @@
                         <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Nama</th>
+                            <th>Nama Lomba</th>
+                            <th>Nama Mahasiswa</th>
                             <th>Kategori</th>
                             <th>Predikat</th>
                             <th>Tahun</th>
@@ -34,6 +35,7 @@
                             <tr>
                                 <td>{{$key+1}}</td>
                                 <td>{{$pts->nama}}</td>
+                                <td>{{$pts->mahasiswa}}</td>
                                 <td>{{$pts->kategori}}</td>
                                 <td>{{$pts->predikat}}</td>
                                 <td>{{$pts->tahun}}</td>

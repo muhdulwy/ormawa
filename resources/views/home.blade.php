@@ -11,7 +11,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <p class="mb-0">You are logged in!</p>
+                    <img src="{{asset('img/home.jpeg')}}" alt="" sizes="50" srcset="">
                 </div>
             </div>
         </div>

@@ -34,8 +34,8 @@
                             <tr>
                                 <td>{{$key+1}}</td>
                                 <td>{{$kgt->nama}}</td>
-                                <td>{{$kgt->tgl_mulai}}</td>
-                                <td>{{$kgt->tgl_selesai}}</td>
+                                <td>{{showDatetime($kgt->tgl_mulai)}}</td>
+                                <td>{{ showDatetime($kgt->tgl_selesai) }}</td>
                                 <td>{{$kgt->thn_akademik}}</td>
                                 <td>{{$kgt->organisasi->nama}}</td>
                                 <td><img src="{{asset('storage/'.$kgt->dokumentasi)}}"  width="100px"></td>

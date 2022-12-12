@@ -74,7 +74,6 @@ class KegiatanController extends Controller
      */
     public function edit(Kegiatan $kegiatan)
     {
-
         $organisasi = Organisasi::all();
         
         return view('kegiatan.edit', compact('organisasi'))->with('kegiatan', $kegiatan);

@@ -34,8 +34,15 @@
             
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Nama:</strong>
-                    <input type="text" name="nama" class="form-control" placeholder="Nama" value="{{ old('nama', $prestasi->nama) }}">
+                    <strong>Nama Lomba:</strong>
+                    <input type="text" name="nama" class="form-control" placeholder="Nama Lomba" value="{{ old('nama', $prestasi->nama) }}">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Nama Mahasiswa:</strong>
+                    <input type="text" name="mahasiswa" class="form-control" placeholder="Nama Mahasiswa" value="{{ old('mahasiswa', $prestasi->mahasiswa) }}">
                 </div>
             </div>
 

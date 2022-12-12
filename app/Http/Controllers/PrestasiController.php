@@ -39,6 +39,7 @@ class PrestasiController extends Controller
     {
         $validate = $request->validate([
             'nama' => 'required',
+            'mahasiswa' => 'required',
             'kategori' => 'required',
             'predikat' => 'required',
             'tahun' => 'required',
@@ -92,6 +93,7 @@ class PrestasiController extends Controller
     {
         $validate = $request->validate([
             'nama' => 'required',
+            'mahasiswa' => 'required',
             'kategori' => 'required',
             'predikat' => 'required',
             'tahun' => 'required',
